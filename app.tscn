@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://c6cjtolcjjhin"]
+
+[ext_resource type="Script" uid="uid://dmf1ux0qhiowg" path="res://app.gd" id="1_j6dmo"]
+
+[node name="App" type="Control" unique_id=1113400781]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j6dmo")
+
+[node name="RectEffect" type="ColorRect" parent="." unique_id=483937508]
+self_modulate = Color(1, 1, 1, 0.39215687)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="GUIs" type="VBoxContainer" parent="." unique_id=1037449133]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="InstructionText" type="Label" parent="GUIs" unique_id=1651642209]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+horizontal_alignment = 1
+
+[node name="SpeedText" type="Label" parent="GUIs" unique_id=1023326868]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="GUIs" unique_id=1384396877]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 70
+text = "START"
+
+[node name="CounterText" type="Label" parent="GUIs" unique_id=1630807557]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 1
+
+[connection signal="pressed" from="GUIs/StartButton" to="." method="_on_start_button_pressed"]
