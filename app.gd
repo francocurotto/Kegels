@@ -15,6 +15,7 @@ func _ready() -> void:
 	var button_y = %ButtonMargin.custom_minimum_size.y
 	size_rest = Vector2(button_y, button_y)
 	size_squeeze = Vector2(button_y, button_y) / 1.5
+	%OptionsRow.visible = false
 
 func _process(_delta: float) -> void:
 	if not $Timer.is_stopped():
@@ -42,6 +43,7 @@ func create_animation():
 func on_start_slow_kegels():
 	%Speed.text = "Slow"
 	$Timer.wait_time = t_reps_slow
+	%OptionsRow.visible = true
 	$Timer.start()
 
 func on_start_fast_kegels():
@@ -77,4 +79,24 @@ func on_kegels_finished():
 	%Counter.text = ""
 	$Timer.stop()
 	%StartButton.text = "Start"
+	%OptionsRow.visible = false
 	%StartButton.disabled = false
+
+func _on_speaker_button_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		%SpeakerButton.text = "🔈"
+	else:
+		%SpeakerButton.text = "🔊"
+
+
+func _on_pause_button_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		%PauseButton.text = "▶️"
+	else:
+		%PauseButton.text = "⏸️"
+
+func _on_vibrate_button_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		%VibrateButton.text = "📳"
+	else:
+		%VibrateButton.text = "📱"

@@ -12,34 +12,38 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_j6dmo")
 
-[node name="GUIs" type="VBoxContainer" parent="." unique_id=1037449133]
+[node name="GUIs" type="VBoxContainer" parent="." unique_id=573917998]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="StartGUI" type="VBoxContainer" parent="GUIs" unique_id=1037449133]
+layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="Instruction" type="Label" parent="GUIs" unique_id=1651642209]
+[node name="Instruction" type="Label" parent="GUIs/StartGUI" unique_id=1651642209]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
 horizontal_alignment = 1
 
-[node name="Speed" type="Label" parent="GUIs" unique_id=1023326868]
+[node name="Speed" type="Label" parent="GUIs/StartGUI" unique_id=1023326868]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 horizontal_alignment = 1
 
-[node name="ButtonMargin" type="MarginContainer" parent="GUIs" unique_id=279249413]
+[node name="ButtonMargin" type="MarginContainer" parent="GUIs/StartGUI" unique_id=279249413]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 350)
 layout_mode = 2
 
-[node name="StartButton" type="Button" parent="GUIs/ButtonMargin" unique_id=1384396877]
+[node name="StartButton" type="Button" parent="GUIs/StartGUI/ButtonMargin" unique_id=1384396877]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(350, 350)
 layout_mode = 2
@@ -51,11 +55,44 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="Counter" type="Label" parent="GUIs" unique_id=1630807557]
+[node name="Counter" type="Label" parent="GUIs/StartGUI" unique_id=1630807557]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 horizontal_alignment = 1
+
+[node name="OptionsGUI" type="MarginContainer" parent="GUIs" unique_id=1517851676]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="OptionsRow" type="HBoxContainer" parent="GUIs/OptionsGUI" unique_id=234575369]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="SpeakerButton" type="Button" parent="GUIs/OptionsGUI/OptionsRow" unique_id=996592813]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+toggle_mode = true
+text = "🔊"
+flat = true
+
+[node name="PauseButton" type="Button" parent="GUIs/OptionsGUI/OptionsRow" unique_id=860466066]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "⏸️"
+flat = true
+
+[node name="VibrateButton" type="Button" parent="GUIs/OptionsGUI/OptionsRow" unique_id=770655337]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+toggle_mode = true
+text = "📳"
+flat = true
 
 [node name="Curtains" type="VBoxContainer" parent="." unique_id=1766888481]
 layout_mode = 1
@@ -84,4 +121,7 @@ size_flags_stretch_ratio = 0.0
 
 [node name="Timer" type="Timer" parent="." unique_id=1416157986]
 
-[connection signal="pressed" from="GUIs/ButtonMargin/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="GUIs/StartGUI/ButtonMargin/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="toggled" from="GUIs/OptionsGUI/OptionsRow/SpeakerButton" to="." method="_on_speaker_button_toggled"]
+[connection signal="toggled" from="GUIs/OptionsGUI/OptionsRow/PauseButton" to="." method="_on_pause_button_toggled"]
+[connection signal="toggled" from="GUIs/OptionsGUI/OptionsRow/VibrateButton" to="." method="_on_vibrate_button_toggled"]
