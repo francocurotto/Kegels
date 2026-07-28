@@ -18,12 +18,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if not $Timer.is_stopped():
-		var t_reps = 1
-		if %Speed.text == "Slow":
-			t_reps = t_reps_slow
-		elif %Speed.text == "Fast":
-			t_reps = t_reps_fast
-		%StartButton.text = str(int($Timer.time_left) % int(t_reps) + 1)
+		%StartButton.text = str(int($Timer.time_left) + 1)
 
 func _on_start_button_pressed() -> void:
 	%StartButton.disabled = true
@@ -50,7 +45,7 @@ func on_start_slow_kegels():
 	$Timer.start()
 
 func on_start_fast_kegels():
-	%Speed.text = "Slow"
+	%Speed.text = "Fast"
 	$Timer.wait_time = t_reps_fast
 
 func kegel_animation(count, n_reps, time):
