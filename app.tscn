@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dmf1ux0qhiowg" path="res://app.gd" id="1_j6dmo"]
 [ext_resource type="Texture2D" uid="uid://2sxvlg8f7qh5" path="res://circle.svg" id="2_qbwvd"]
+[ext_resource type="Texture2D" uid="uid://b1h83s3q2qvgu" path="res://assets/icons/speaker-on.svg" id="3_nee2x"]
+[ext_resource type="Texture2D" uid="uid://cssig7qhlyew5" path="res://assets/icons/pause.svg" id="4_v7vdx"]
+[ext_resource type="Texture2D" uid="uid://d0tidp58gebpw" path="res://assets/icons/vibrate-on.svg" id="5_atqe7"]
 
 [node name="App" type="Control" unique_id=1113400781]
 layout_mode = 3
@@ -73,29 +76,35 @@ alignment = 1
 
 [node name="SpeakerButton" type="Button" parent="GUIs/OptionsGUI/OptionsRow" unique_id=996592813]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 70
 toggle_mode = true
 button_pressed = true
-text = "🔊"
+icon = ExtResource("3_nee2x")
 flat = true
+expand_icon = true
 
 [node name="PauseButton" type="Button" parent="GUIs/OptionsGUI/OptionsRow" unique_id=860466066]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 70
 toggle_mode = true
-text = "⏸️"
+icon = ExtResource("4_v7vdx")
 flat = true
+expand_icon = true
 
 [node name="VibrateButton" type="Button" parent="GUIs/OptionsGUI/OptionsRow" unique_id=770655337]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 70
 toggle_mode = true
 button_pressed = true
-text = "📳"
+icon = ExtResource("5_atqe7")
 flat = true
+expand_icon = true
 
 [node name="Curtains" type="VBoxContainer" parent="." unique_id=1766888481]
 layout_mode = 1

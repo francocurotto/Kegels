@@ -11,6 +11,14 @@ var tween
 var size_rest
 var size_squeeze
 
+# onready variables
+@onready var play_icon = preload("res://assets/icons/play.svg")
+@onready var pause_icon = preload("res://assets/icons/pause.svg")
+@onready var speaker_off_icon = preload("res://assets/icons/speaker-off.svg")
+@onready var speaker_on_icon = preload("res://assets/icons/speaker-on.svg")
+@onready var vibrate_off_icon = preload("res://assets/icons/vibrate-off.svg")
+@onready var vibrate_on_icon = preload("res://assets/icons/vibrate-on.svg")
+
 func _ready() -> void:
 	var button_y = %ButtonMargin.custom_minimum_size.y
 	size_rest = Vector2(button_y, button_y)
@@ -88,23 +96,23 @@ func on_kegels_finished():
 
 func _on_speaker_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
-		%SpeakerButton.text = "🔊"
+		%SpeakerButton.icon = speaker_on_icon
 	else:
-		%SpeakerButton.text = "🔈"
+		%SpeakerButton.icon = speaker_off_icon
 
 
 func _on_pause_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
-		%PauseButton.text = "▶️"
+		%PauseButton.icon = play_icon
 		tween.pause()
 		$Timer.paused = true
 	else:
-		%PauseButton.text = "⏸️"
+		%PauseButton.icon = pause_icon
 		tween.play()
 		$Timer.paused = false
 
 func _on_vibrate_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
-		%VibrateButton.text = "📳"
+		%VibrateButton.icon = vibrate_on_icon
 	else:
-		%VibrateButton.text = "📱"
+		%VibrateButton.icon = vibrate_off_icon
