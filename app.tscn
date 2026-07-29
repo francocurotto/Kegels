@@ -68,29 +68,32 @@ layout_mode = 2
 [node name="OptionsRow" type="HBoxContainer" parent="GUIs/OptionsGUI" unique_id=234575369]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 15
+theme_override_constants/separation = 30
 alignment = 1
 
 [node name="SpeakerButton" type="Button" parent="GUIs/OptionsGUI/OptionsRow" unique_id=996592813]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 70
 toggle_mode = true
+button_pressed = true
 text = "🔊"
 flat = true
 
 [node name="PauseButton" type="Button" parent="GUIs/OptionsGUI/OptionsRow" unique_id=860466066]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 70
+toggle_mode = true
 text = "⏸️"
 flat = true
 
 [node name="VibrateButton" type="Button" parent="GUIs/OptionsGUI/OptionsRow" unique_id=770655337]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 70
 toggle_mode = true
+button_pressed = true
 text = "📳"
 flat = true
 

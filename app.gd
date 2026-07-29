@@ -69,9 +69,13 @@ func on_kegel_squeeze(n_reps, count):
 	var plural = "s" if left > 1 else ""
 	%Counter.text = "%d rep%s more to go" % [left, plural]
 	%Instruction.text = "Squeeze"
+	if %VibrateButton.button_pressed:
+		Input.vibrate_handheld()
 
 func on_kegel_rest():
 	%Instruction.text = "Rest"
+	if %VibrateButton.button_pressed:
+		Input.vibrate_handheld()
 
 func on_kegels_finished():
 	%Instruction.text = ""
@@ -84,16 +88,20 @@ func on_kegels_finished():
 
 func _on_speaker_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
-		%SpeakerButton.text = "🔈"
-	else:
 		%SpeakerButton.text = "🔊"
+	else:
+		%SpeakerButton.text = "🔈"
 
 
 func _on_pause_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		%PauseButton.text = "▶️"
+		tween.pause()
+		$Timer.paused = true
 	else:
 		%PauseButton.text = "⏸️"
+		tween.play()
+		$Timer.paused = false
 
 func _on_vibrate_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
