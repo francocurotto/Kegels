@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://2sxvlg8f7qh5" path="res://circle.svg" id="2_qbwvd"]
 [ext_resource type="Texture2D" uid="uid://b1h83s3q2qvgu" path="res://assets/icons/speaker-on.svg" id="3_nee2x"]
 [ext_resource type="Texture2D" uid="uid://cssig7qhlyew5" path="res://assets/icons/pause.svg" id="4_v7vdx"]
-[ext_resource type="Texture2D" uid="uid://d0tidp58gebpw" path="res://assets/icons/vibrate-on.svg" id="5_atqe7"]
+[ext_resource type="Texture2D" uid="uid://cnhecr0thd4mv" path="res://assets/icons/vibrate-on.svg" id="5_atqe7"]
 
 [node name="App" type="Control" unique_id=1113400781]
 layout_mode = 3
