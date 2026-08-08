@@ -1,5 +1,11 @@
 extends Control
 
+# settings
+var n_reps_slow = 10
+var n_reps_fast = 10
+var t_reps_slow = 5.0
+var t_reps_fast = 1.0
+
 # variables
 var tween
 var size_rest
@@ -14,7 +20,6 @@ var size_squeeze
 @onready var vibrate_on_icon = preload("res://assets/icons/vibrate-on.svg")
 
 func _ready() -> void:
-	load_config_file()
 	var button_y = %ButtonMargin.custom_minimum_size.y
 	size_rest = Vector2(button_y, button_y)
 	size_squeeze = Vector2(button_y, button_y) / 1.5
@@ -36,22 +41,22 @@ func prepare_animation():
 
 func create_animation():
 	tween.tween_callback(on_start_slow_kegels)
-	for i in Globals.n_reps_slow:
-		kegel_animation(i, Globals.n_reps_slow, Globals.t_reps_slow)
+	for i in n_reps_slow:
+		kegel_animation(i, n_reps_slow, t_reps_slow)
 	tween.tween_callback(on_start_fast_kegels)
-	for i in Globals.n_reps_fast:
-		kegel_animation(i, Globals.n_reps_fast, Globals.t_reps_fast)
+	for i in n_reps_fast:
+		kegel_animation(i, n_reps_fast, t_reps_fast)
 	tween.tween_callback(on_kegels_finished)
 
 func on_start_slow_kegels():
 	%Speed.text = "Slow"
-	$Timer.wait_time = Globals.t_reps_slow
+	$Timer.wait_time = t_reps_slow
 	%OptionsRow.visible = true
 	$Timer.start()
 
 func on_start_fast_kegels():
 	%Speed.text = "Fast"
-	$Timer.wait_time = Globals.t_reps_fast
+	$Timer.wait_time = t_reps_fast
 
 func kegel_animation(count, n_reps, time):
 	tween.tween_callback(on_kegel_squeeze.bind(n_reps, count))
@@ -111,13 +116,3 @@ func _on_vibrate_button_toggled(toggled_on: bool) -> void:
 		%VibrateButton.icon = vibrate_on_icon
 	else:
 		%VibrateButton.icon = vibrate_off_icon
-
-func load_config_file():
-	var cfile = ConfigFile.new()
-	var err = cfile.load("res://settings.cfg")
-	if err != OK:
-		return
-	Globals.n_reps_slow = cfile.get_value("settings", "n_reps_slow")
-	Globals.n_reps_fast = cfile.get_value("settings", "n_reps_fast")
-	Globals.t_reps_slow = cfile.get_value("settings", "t_reps_slow")
-	Globals.t_reps_fast = cfile.get_value("settings", "t_reps_fast")
