@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://d3pijutq14al8"]
+
+[ext_resource type="Script" uid="uid://dn5ln5qf1m4cd" path="res://scenes/settings/spin_setting/spin_setting.gd" id="1_l6ymr"]
+
+[sub_resource type="Theme" id="Theme_rnmoi"]
+default_font_size = 25
+
+[node name="SpinSetting" type="HBoxContainer" unique_id=2018222685]
+custom_minimum_size = Vector2(0, 80)
+theme_override_constants/separation = 30
+script = ExtResource("1_l6ymr")
+
+[node name="Label" type="Label" parent="." unique_id=1110783130]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 2
+
+[node name="SpinBox" type="SpinBox" parent="." unique_id=1426281976]
+layout_mode = 2
+size_flags_horizontal = 2
+theme = SubResource("Theme_rnmoi")
+theme_override_constants/buttons_width = 100
+min_value = 1.0
+max_value = 20.0
+value = 1.0
+rounded = true
+alignment = 1
+custom_arrow_round = true
