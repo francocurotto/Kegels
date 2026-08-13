@@ -1,5 +1,9 @@
 extends Control
 
+# signals
+signal train_started
+signal train_ended
+
 # variables
 var tween
 var size_rest
@@ -24,6 +28,7 @@ func _process(_delta: float) -> void:
 		%StartButton.text = str(int($Timer.time_left) + 1)
 
 func _on_start_button_pressed() -> void:
+	train_started.emit()
 	%StartButton.disabled = true
 	prepare_animation()
 	create_animation()
@@ -87,6 +92,7 @@ func on_kegels_finished():
 	%StartButton.text = "Start"
 	%OptionsRow.visible = false
 	%StartButton.disabled = false
+	train_ended.emit()
 
 func _on_speaker_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:

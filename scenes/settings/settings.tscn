@@ -3,6 +3,26 @@
 [ext_resource type="PackedScene" uid="uid://d3pijutq14al8" path="res://scenes/settings/spin_setting/spin_setting.tscn" id="1_26ncd"]
 [ext_resource type="Script" uid="uid://36uv2w4ikhh6" path="res://scenes/settings/settings.gd" id="1_vu5fi"]
 
+[sub_resource type="DPITexture" id="DPITexture_vu5fi"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"16\"><rect width=\"30\" height=\"14\" x=\"1\" y=\"1\" fill=\"#fff\" fill-opacity=\".75\" rx=\"7\"/><circle cx=\"24\" cy=\"8\" r=\"5\" fill=\"#1a1a1a\"/></svg>
+"
+base_scale = 2.0
+
+[sub_resource type="DPITexture" id="DPITexture_tt6xx"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"16\"><g fill-opacity=\".5\"><rect width=\"30\" height=\"14\" x=\"1\" y=\"1\" fill=\"#1a1a1a\" rx=\"7\"/><circle cx=\"8\" cy=\"8\" r=\"5\" fill=\"#fff\"/></g></svg>
+"
+base_scale = 2.0
+
+[sub_resource type="DPITexture" id="DPITexture_1slea"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"16\"><rect width=\"30\" height=\"14\" x=\"1\" y=\"1\" fill=\"#fff\" fill-opacity=\".75\" rx=\"7\"/><circle cx=\"24\" cy=\"8\" r=\"5\" fill=\"#1a1a1a\"/></svg>
+"
+base_scale = 2.0
+
+[sub_resource type="DPITexture" id="DPITexture_v1hle"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"16\"><g fill-opacity=\".5\"><rect width=\"30\" height=\"14\" x=\"1\" y=\"1\" fill=\"#1a1a1a\" rx=\"7\"/><circle cx=\"8\" cy=\"8\" r=\"5\" fill=\"#fff\"/></g></svg>
+"
+base_scale = 2.0
+
 [node name="Settings" type="Control" unique_id=1733283528]
 layout_mode = 3
 anchors_preset = 15
@@ -43,3 +63,24 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Time Reps Slow:"
 suffix = "s"
+
+[node name="SpeakerOption" type="CheckButton" parent="Column" unique_id=291107391]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 25
+theme_override_icons/checked = SubResource("DPITexture_vu5fi")
+theme_override_icons/unchecked = SubResource("DPITexture_tt6xx")
+button_pressed = true
+text = "Default Sound: "
+
+[node name="VibrateOption" type="CheckButton" parent="Column" unique_id=414877496]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 25
+theme_override_icons/checked = SubResource("DPITexture_1slea")
+theme_override_icons/unchecked = SubResource("DPITexture_v1hle")
+button_pressed = true
+text = "Default Sound: "
+
+[connection signal="toggled" from="Column/SpeakerOption" to="." method="_on_speaker_option_toggled"]
+[connection signal="toggled" from="Column/VibrateOption" to="." method="_on_vibrate_option_toggled"]

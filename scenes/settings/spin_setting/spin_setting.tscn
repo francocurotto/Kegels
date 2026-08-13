@@ -27,3 +27,5 @@ value = 1.0
 rounded = true
 alignment = 1
 custom_arrow_round = true
+
+[connection signal="value_changed" from="SpinBox" to="." method="_on_spin_box_value_changed"]
