@@ -1,6 +1,8 @@
 extends Control
 
 func _ready() -> void:
+	%Gym.curtain_clear = %CurtainClear
+	%Gym.curtain_white = %CurtainWhite
 	%Gym.train_started.connect(on_train_started)
 	%Gym.train_ended.connect(on_train_ended)
 

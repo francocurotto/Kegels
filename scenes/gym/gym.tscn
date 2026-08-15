@@ -111,31 +111,6 @@ flat = true
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="Curtains" type="VBoxContainer" parent="." unique_id=1766888481]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_behavior_recursive = 1
-mouse_force_pass_scroll_events = false
-theme_override_constants/separation = 0
-
-[node name="CurtainClear" type="ColorRect" parent="Curtains" unique_id=1963727630]
-unique_name_in_owner = true
-self_modulate = Color(1, 1, 1, 0.39215687)
-layout_mode = 2
-size_flags_vertical = 3
-color = Color(1, 1, 1, 0)
-
-[node name="CurtainWhite" type="ColorRect" parent="Curtains" unique_id=483937508]
-unique_name_in_owner = true
-self_modulate = Color(1, 1, 1, 0.39215687)
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.0
-
 [node name="Timer" type="Timer" parent="." unique_id=1416157986]
 
 [node name="AudioSqueeze" type="AudioStreamPlayer" parent="." unique_id=1110345774]

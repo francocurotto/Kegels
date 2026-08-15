@@ -8,6 +8,8 @@ signal train_ended
 var tween
 var size_rest
 var size_squeeze
+var curtain_clear
+var curtain_white
 
 # onready variables
 @onready var play_icon = preload("res://assets/icons/play.svg")
@@ -61,15 +63,15 @@ func on_start_fast_kegels():
 
 func kegel_animation(count, n_reps, time):
 	tween.tween_callback(on_kegel_squeeze.bind(n_reps, count))
-	tween.tween_property(%CurtainClear, "size_flags_stretch_ratio", 0, time)
+	tween.tween_property(curtain_clear, "size_flags_stretch_ratio", 0, time)
 	tween.parallel()
-	tween.tween_property(%CurtainWhite, "size_flags_stretch_ratio", 1, time)
+	tween.tween_property(curtain_white, "size_flags_stretch_ratio", 1, time)
 	tween.parallel()
 	tween.tween_property(%StartButton, "custom_minimum_size", size_squeeze, 1)
 	tween.tween_callback(on_kegel_rest)
-	tween.tween_property(%CurtainClear, "size_flags_stretch_ratio", 1, time)
+	tween.tween_property(curtain_clear, "size_flags_stretch_ratio", 1, time)
 	tween.parallel()
-	tween.tween_property(%CurtainWhite, "size_flags_stretch_ratio", 0, time)
+	tween.tween_property(curtain_white, "size_flags_stretch_ratio", 0, time)
 	tween.parallel()
 	tween.tween_property(%StartButton, "custom_minimum_size", size_rest, 1)
 

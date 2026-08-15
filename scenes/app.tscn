@@ -41,3 +41,28 @@ visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 metadata/_tab_name = ""
+
+[node name="Curtains" type="VBoxContainer" parent="." unique_id=1065198413]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 1
+mouse_force_pass_scroll_events = false
+theme_override_constants/separation = 0
+
+[node name="CurtainClear" type="ColorRect" parent="Curtains" unique_id=1500052925]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0.39215687)
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(1, 1, 1, 0)
+
+[node name="CurtainWhite" type="ColorRect" parent="Curtains" unique_id=91845184]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0.39215687)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
