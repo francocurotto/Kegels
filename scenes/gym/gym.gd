@@ -30,6 +30,8 @@ func _process(_delta: float) -> void:
 func _on_start_button_pressed() -> void:
 	train_started.emit()
 	%StartButton.disabled = true
+	%SpeakerButton.button_pressed = Globals.speaker
+	%VibrateButton.button_pressed = Globals.vibrate
 	prepare_animation()
 	create_animation()
 
@@ -76,11 +78,15 @@ func on_kegel_squeeze(n_reps, count):
 	var plural = "s" if left > 1 else ""
 	%Counter.text = "%d rep%s more to go" % [left, plural]
 	%Instruction.text = "Squeeze"
+	if %SpeakerButton.button_pressed:
+		$AudioSqueeze.play()
 	if %VibrateButton.button_pressed:
 		Input.vibrate_handheld()
 
 func on_kegel_rest():
 	%Instruction.text = "Rest"
+	if %SpeakerButton.button_pressed:
+		$AudioRest.play()
 	if %VibrateButton.button_pressed:
 		Input.vibrate_handheld()
 
@@ -94,13 +100,6 @@ func on_kegels_finished():
 	%StartButton.disabled = false
 	train_ended.emit()
 
-func _on_speaker_button_toggled(toggled_on: bool) -> void:
-	if toggled_on:
-		%SpeakerButton.icon = speaker_on_icon
-	else:
-		%SpeakerButton.icon = speaker_off_icon
-
-
 func _on_pause_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		%PauseButton.icon = play_icon
@@ -110,6 +109,12 @@ func _on_pause_button_toggled(toggled_on: bool) -> void:
 		%PauseButton.icon = pause_icon
 		tween.play()
 		$Timer.paused = false
+
+func _on_speaker_button_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		%SpeakerButton.icon = speaker_on_icon
+	else:
+		%SpeakerButton.icon = speaker_off_icon
 
 func _on_vibrate_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:

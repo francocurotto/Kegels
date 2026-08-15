@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://b1h83s3q2qvgu" path="res://assets/icons/speaker-on.svg" id="3_alru1"]
 [ext_resource type="Texture2D" uid="uid://cssig7qhlyew5" path="res://assets/icons/pause.svg" id="4_suq7a"]
 [ext_resource type="Texture2D" uid="uid://cnhecr0thd4mv" path="res://assets/icons/vibrate-on.svg" id="5_6ou7w"]
+[ext_resource type="AudioStream" uid="uid://ur537qd7k533" path="res://assets/sfx/select_blip.wav" id="6_eaum8"]
+[ext_resource type="AudioStream" uid="uid://ogpgpk58jwvm" path="res://assets/sfx/deselect_blip.wav" id="7_j4p3a"]
 
 [node name="Gym" type="Control" unique_id=1113400781]
 layout_mode = 3
@@ -135,6 +137,12 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 0.0
 
 [node name="Timer" type="Timer" parent="." unique_id=1416157986]
+
+[node name="AudioSqueeze" type="AudioStreamPlayer" parent="." unique_id=1110345774]
+stream = ExtResource("6_eaum8")
+
+[node name="AudioRest" type="AudioStreamPlayer" parent="." unique_id=1172069583]
+stream = ExtResource("7_j4p3a")
 
 [connection signal="pressed" from="GUIs/StartGUI/ButtonMargin/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="toggled" from="GUIs/OptionsGUI/OptionsRow/SpeakerButton" to="." method="_on_speaker_button_toggled"]

@@ -2,7 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://c6cjtolcjjhin" path="res://scenes/gym/gym.tscn" id="1_1670a"]
 [ext_resource type="Script" uid="uid://bvv58ixpjk5cb" path="res://scenes/app.gd" id="1_dmsei"]
+[ext_resource type="Texture2D" uid="uid://drff87acdspfu" path="res://assets/icons/gym.svg" id="2_awiwq"]
 [ext_resource type="PackedScene" uid="uid://c1sjy3m6k6sw3" path="res://scenes/settings/settings.tscn" id="2_dmsei"]
+[ext_resource type="Texture2D" uid="uid://bxjwtl0w3crk3" path="res://assets/icons/settings.svg" id="3_k6d74"]
 
 [node name="App" type="Control" unique_id=1676762228]
 layout_mode = 3
@@ -20,21 +22,22 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 100
+theme_override_constants/icon_max_width = 70
+theme_override_font_sizes/font_size = 80
 tab_alignment = 1
 current_tab = 0
 tabs_position = 1
-tab_0/title = "💪"
-tab_1/title = "⚙️"
+tab_0/icon = ExtResource("2_awiwq")
+tab_1/icon = ExtResource("3_k6d74")
 
 [node name="Gym" parent="TabContainer" unique_id=1113400781 instance=ExtResource("1_1670a")]
 unique_name_in_owner = true
 layout_mode = 2
 metadata/_tab_index = 0
-metadata/_tab_name = "💪"
+metadata/_tab_name = ""
 
 [node name="Settings" parent="TabContainer" unique_id=1733283528 instance=ExtResource("2_dmsei")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
-metadata/_tab_name = "⚙️"
+metadata/_tab_name = ""

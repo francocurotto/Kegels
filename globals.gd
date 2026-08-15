@@ -5,6 +5,8 @@ var n_reps_slow = 10
 var n_reps_fast = 10
 var t_reps_slow = 5.0
 var t_reps_fast = 1.0
+var speaker = true
+var vibrate = true
 
 # config file
 var config = ConfigFile.new()
@@ -19,3 +21,5 @@ func _ready():
 	n_reps_fast = config.get_value("settings", "n_reps_fast")
 	t_reps_slow = config.get_value("settings", "t_reps_slow")
 	t_reps_fast = config.get_value("settings", "t_reps_fast")
+	speaker = config.get_value("options", "speaker")
+	vibrate = config.get_value("options", "vibrate")
