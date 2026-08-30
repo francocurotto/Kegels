@@ -10,6 +10,8 @@ var size_rest
 var size_squeeze
 var curtain_clear
 var curtain_white
+var t_squeeze
+var t_rest
 
 # onready variables
 @onready var play_icon = preload("res://assets/icons/play.svg")
@@ -27,7 +29,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if not $Timer.is_stopped():
-		%StartButton.text = str(int($Timer.time_left) + 1)
+		%StartButton.text = str(int(min($Timer.wait_time, $Timer.time_left+1)))
 
 func _on_start_button_pressed() -> void:
 	train_started.emit()
@@ -45,37 +47,40 @@ func prepare_animation():
 func create_animation():
 	tween.tween_callback(on_start_slow_kegels)
 	for i in Globals.n_reps_slow:
-		kegel_animation(i, Globals.n_reps_slow, Globals.t_reps_slow)
+		kegel_animation(i, Globals.n_reps_slow, Globals.t_slow_squeeze, Globals.t_slow_rest)
 	tween.tween_callback(on_start_fast_kegels)
 	for i in Globals.n_reps_fast:
-		kegel_animation(i, Globals.n_reps_fast, Globals.t_reps_fast)
+		kegel_animation(i, Globals.n_reps_fast, Globals.t_fast_squeeze, Globals.t_fast_rest)
 	tween.tween_callback(on_kegels_finished)
 
 func on_start_slow_kegels():
 	%Speed.text = "Slow"
-	$Timer.wait_time = Globals.t_reps_slow
 	%OptionsRow.visible = true
-	$Timer.start()
+	t_squeeze = Globals.t_slow_squeeze
+	t_rest = Globals.t_slow_rest
 
 func on_start_fast_kegels():
 	%Speed.text = "Fast"
-	$Timer.wait_time = Globals.t_reps_fast
+	t_squeeze = Globals.t_slow_squeeze
+	t_rest = Globals.t_slow_rest
 
-func kegel_animation(count, n_reps, time):
+func kegel_animation(count, n_reps, time_squeeze, time_rest):
 	tween.tween_callback(on_kegel_squeeze.bind(n_reps, count))
-	tween.tween_property(curtain_clear, "size_flags_stretch_ratio", 0, time)
+	tween.tween_property(curtain_clear, "size_flags_stretch_ratio", 0, time_squeeze)
 	tween.parallel()
-	tween.tween_property(curtain_white, "size_flags_stretch_ratio", 1, time)
+	tween.tween_property(curtain_white, "size_flags_stretch_ratio", 1, time_squeeze)
 	tween.parallel()
 	tween.tween_property(%StartButton, "custom_minimum_size", size_squeeze, 1)
 	tween.tween_callback(on_kegel_rest)
-	tween.tween_property(curtain_clear, "size_flags_stretch_ratio", 1, time)
+	tween.tween_property(curtain_clear, "size_flags_stretch_ratio", 1, time_rest)
 	tween.parallel()
-	tween.tween_property(curtain_white, "size_flags_stretch_ratio", 0, time)
+	tween.tween_property(curtain_white, "size_flags_stretch_ratio", 0, time_rest)
 	tween.parallel()
 	tween.tween_property(%StartButton, "custom_minimum_size", size_rest, 1)
 
 func on_kegel_squeeze(n_reps, count):
+	$Timer.wait_time = t_squeeze
+	$Timer.start()
 	var left = n_reps - count
 	var plural = "s" if left > 1 else ""
 	%Counter.text = "%d rep%s more to go" % [left, plural]
@@ -86,6 +91,8 @@ func on_kegel_squeeze(n_reps, count):
 		Input.vibrate_handheld()
 
 func on_kegel_rest():
+	$Timer.wait_time = t_rest
+	$Timer.start()
 	%Instruction.text = "Rest"
 	if %SpeakerButton.button_pressed:
 		$AudioRest.play()
