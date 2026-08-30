@@ -61,8 +61,8 @@ func on_start_slow_kegels():
 
 func on_start_fast_kegels():
 	%Speed.text = "Fast"
-	t_squeeze = Globals.t_slow_squeeze
-	t_rest = Globals.t_slow_rest
+	t_squeeze = Globals.t_fast_squeeze
+	t_rest = Globals.t_fast_rest
 
 func kegel_animation(count, n_reps, time_squeeze, time_rest):
 	tween.tween_callback(on_kegel_squeeze.bind(n_reps, count))
