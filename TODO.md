@@ -1,3 +1,2 @@
-- fix config save
-- add statistics
 - add invert slow and fast kegel
+- add statistics

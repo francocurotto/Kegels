@@ -3,17 +3,15 @@
 [ext_resource type="Script" uid="uid://dn5ln5qf1m4cd" path="res://scenes/settings/spin_setting/spin_setting.gd" id="1_l6ymr"]
 
 [sub_resource type="Theme" id="Theme_rnmoi"]
-default_font_size = 30
+default_font_size = 25
 
 [node name="SpinSetting" type="VBoxContainer" unique_id=1955657453]
-offset_right = 182.0
-offset_bottom = 89.0
+offset_right = 166.0
+offset_bottom = 82.0
 script = ExtResource("1_l6ymr")
-max_value = null
 
 [node name="Label" type="Label" parent="." unique_id=1110783130]
 layout_mode = 2
-size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 
 [node name="SpinBox" type="SpinBox" parent="." unique_id=1426281976]

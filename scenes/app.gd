@@ -21,11 +21,12 @@ func _notification(event):
 			get_tree().quit()
 
 func save_data():
-	#FIXME does not work
-	print("a")
 	Globals.config.set_value("settings", "n_reps_slow", Globals.n_reps_slow)
 	Globals.config.set_value("settings", "n_reps_fast", Globals.n_reps_fast)
 	Globals.config.set_value("settings", "t_slow_squeeze", Globals.t_slow_squeeze)
 	Globals.config.set_value("settings", "t_slow_rest", Globals.t_slow_rest)
 	Globals.config.set_value("settings", "t_fast_squeeze", Globals.t_fast_squeeze)
 	Globals.config.set_value("settings", "t_fast_rest", Globals.t_fast_rest)
+	Globals.config.set_value("options", "speaker", Globals.speaker)
+	Globals.config.set_value("options", "vibrate", Globals.vibrate)
+	Globals.config.save("res://settings.cfg")
