@@ -6,10 +6,22 @@ signal train_ended
 
 # variables
 var tween
+# button animation variables
 var size_rest
 var size_squeeze
+# curtain animation variables
 var curtain_clear
 var curtain_white
+# order control variables
+var n_reps_1
+var t_squeeze_1
+var t_rest_1
+var speed_text_1
+var n_reps_2
+var t_squeeze_2
+var t_rest_2
+var speed_text_2
+#
 var t_squeeze
 var t_rest
 
@@ -45,24 +57,45 @@ func prepare_animation():
 	tween.set_trans(Tween.TRANS_CUBIC)
 
 func create_animation():
-	tween.tween_callback(on_start_slow_kegels)
-	for i in Globals.n_reps_slow:
-		kegel_animation(i, Globals.n_reps_slow, Globals.t_slow_squeeze, Globals.t_slow_rest)
-	tween.tween_callback(on_start_fast_kegels)
-	for i in Globals.n_reps_fast:
-		kegel_animation(i, Globals.n_reps_fast, Globals.t_fast_squeeze, Globals.t_fast_rest)
+	define_kegel_order()
+	%OptionsRow.visible = true
+	tween.tween_callback(on_start_kegels_1)
+	for i in n_reps_1:
+		kegel_animation(i, n_reps_1, t_squeeze_1, t_rest_1)
+	tween.tween_callback(on_start_kegels_2)
+	for i in n_reps_2:
+		kegel_animation(i, n_reps_2, t_squeeze_2, t_rest_2)
 	tween.tween_callback(on_kegels_finished)
 
-func on_start_slow_kegels():
-	%Speed.text = "Slow"
-	%OptionsRow.visible = true
-	t_squeeze = Globals.t_slow_squeeze
-	t_rest = Globals.t_slow_rest
+func on_start_kegels_1():
+	%Speed.text = speed_text_1
+	t_squeeze = t_squeeze_1
+	t_rest = t_rest_1
 
-func on_start_fast_kegels():
-	%Speed.text = "Fast"
-	t_squeeze = Globals.t_fast_squeeze
-	t_rest = Globals.t_fast_rest
+func on_start_kegels_2():
+	%Speed.text = speed_text_2
+	t_squeeze = t_squeeze_2
+	t_rest = t_rest_2
+
+func define_kegel_order():
+	if Globals.order == 0:
+		n_reps_1 = Globals.n_reps_slow
+		t_squeeze_1 = Globals.t_slow_squeeze
+		t_rest_1 = Globals.t_slow_rest
+		speed_text_1 = "Slow"
+		n_reps_2 = Globals.n_reps_fast
+		t_squeeze_2 = Globals.t_fast_squeeze
+		t_rest_2 = Globals.t_fast_rest
+		speed_text_2 = "Fast"
+	elif Globals.order == 1:
+		n_reps_1 = Globals.n_reps_fast
+		t_squeeze_1 = Globals.t_fast_squeeze
+		t_rest_1 = Globals.t_fast_rest
+		speed_text_1 = "Fast"
+		n_reps_2 = Globals.n_reps_slow
+		t_squeeze_2 = Globals.t_slow_squeeze
+		t_rest_2 = Globals.t_slow_rest
+		speed_text_2 = "Slow"
 
 func kegel_animation(count, n_reps, time_squeeze, time_rest):
 	tween.tween_callback(on_kegel_squeeze.bind(n_reps, count))

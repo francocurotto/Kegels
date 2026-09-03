@@ -7,6 +7,7 @@ var t_slow_squeeze = 5.0
 var t_slow_rest = 5.0
 var t_fast_squeeze = 1.0
 var t_fast_rest = 1.0
+var order = 0
 var speaker = true
 var vibrate = true
 
@@ -25,5 +26,6 @@ func _ready():
 	t_slow_rest = config.get_value("settings", "t_slow_rest")
 	t_fast_squeeze = config.get_value("settings", "t_fast_squeeze")
 	t_fast_rest = config.get_value("settings", "t_fast_rest")
+	order = config.get_value("settings", "order")
 	speaker = config.get_value("options", "speaker")
 	vibrate = config.get_value("options", "vibrate")

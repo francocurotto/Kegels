@@ -1,2 +1,2 @@
-- add invert slow and fast kegel
 - add statistics
+- add curtain animations option

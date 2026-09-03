@@ -7,6 +7,7 @@ func _ready() -> void:
 	%TSlowRest.value = Globals.t_slow_rest
 	%TFastSqueeze.value = Globals.t_fast_squeeze
 	%TFastRest.value = Globals.t_fast_rest
+	%OrderButton.selected = Globals.order
 	%SpeakerOption.button_pressed = Globals.speaker
 	%VibrateOption.button_pressed = Globals.vibrate
 	%NRepsSlow.changed.connect(func(x):Globals.n_reps_slow=x)
@@ -15,6 +16,9 @@ func _ready() -> void:
 	%TSlowRest.changed.connect(func(x):Globals.t_slow_rest=x)
 	%TFastSqueeze.changed.connect(func(x):Globals.t_fast_squeeze=x)
 	%TFastRest.changed.connect(func(x):Globals.t_fast_rest=x)
+
+func _on_order_button_item_selected(index: int) -> void:
+	Globals.order = index
 
 func _on_speaker_option_toggled(toggled_on: bool) -> void:
 	Globals.speaker = toggled_on
