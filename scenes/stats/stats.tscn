@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://c17syhqkms6af"]
+
+[ext_resource type="Script" uid="uid://2h86p0nbb2pv" path="res://scenes/stats/stats.gd" id="1_mxjvo"]
+
+[node name="Stats" type="Control" unique_id=34621504]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mxjvo")

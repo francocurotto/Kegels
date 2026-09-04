@@ -140,6 +140,7 @@ func on_kegels_finished():
 	%StartButton.text = "Start"
 	%OptionsRow.visible = false
 	%StartButton.disabled = false
+	Globals.stats[Time.get_date_string_from_system()] += 1
 	train_ended.emit()
 
 func _on_pause_button_toggled(toggled_on: bool) -> void:

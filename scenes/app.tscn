@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://drff87acdspfu" path="res://assets/icons/gym.svg" id="2_awiwq"]
 [ext_resource type="PackedScene" uid="uid://c1sjy3m6k6sw3" path="res://scenes/settings/settings.tscn" id="2_dmsei"]
 [ext_resource type="Texture2D" uid="uid://bxjwtl0w3crk3" path="res://assets/icons/settings.svg" id="3_k6d74"]
+[ext_resource type="Texture2D" uid="uid://ch62hukvxcf4q" path="res://assets/icons/stats.svg" id="4_ljqyw"]
+[ext_resource type="PackedScene" uid="uid://c17syhqkms6af" path="res://scenes/stats/stats.tscn" id="6_k6d74"]
 
 [node name="App" type="Control" unique_id=1676762228]
 layout_mode = 3
@@ -29,6 +31,7 @@ current_tab = 0
 tabs_position = 1
 tab_0/icon = ExtResource("2_awiwq")
 tab_1/icon = ExtResource("3_k6d74")
+tab_2/icon = ExtResource("4_ljqyw")
 
 [node name="Gym" parent="TabContainer" unique_id=1113400781 instance=ExtResource("1_1670a")]
 unique_name_in_owner = true
@@ -40,6 +43,12 @@ metadata/_tab_name = ""
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
+metadata/_tab_name = ""
+
+[node name="Stats" parent="TabContainer" unique_id=34621504 instance=ExtResource("6_k6d74")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
 metadata/_tab_name = ""
 
 [node name="Curtains" type="VBoxContainer" parent="." unique_id=1065198413]
