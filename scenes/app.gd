@@ -5,6 +5,7 @@ func _ready() -> void:
 	%Gym.curtain_white = %CurtainWhite
 	%Gym.train_started.connect(on_train_started)
 	%Gym.train_ended.connect(on_train_ended)
+	%Gym.train_ended.connect(%Stats.on_new_kegel)
 
 func on_train_started():
 	for i in $TabContainer.get_tab_count():
