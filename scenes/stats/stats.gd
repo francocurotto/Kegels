@@ -37,7 +37,8 @@ func render_stats():
 
 func create_date_label(date):
 	var label = Label.new()
-	label.text = date
+	label.text = date.replace("-", "/")
+	label.add_theme_font_size_override("font_size", 30)
 	return label
 
 func create_count_rect():
@@ -48,6 +49,7 @@ func create_count_rect():
 func create_blank_rect():
 	var rect = create_count_rect()
 	rect.modulate = Color(1,1,1,0)
+	return rect
 
 func on_new_kegel():
 	for child in %StatsGrid.get_children():

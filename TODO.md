@@ -1,2 +1,2 @@
-- add statistics
+- add daily goal option and indication
 - add curtain animations option
