@@ -1,2 +1,4 @@
+- fix day appearing earlyin stats
 - add daily goal option and indication
+- add daily kegel time calculation
 - add curtain animations option
