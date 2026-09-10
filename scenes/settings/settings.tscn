@@ -107,7 +107,7 @@ alignment = 1
 [node name="Text" type="Label" parent="Column/Order" unique_id=862481883]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Order:"
+text = "Order: "
 
 [node name="OrderButton" type="OptionButton" parent="Column/Order" unique_id=607810314]
 unique_name_in_owner = true
@@ -119,6 +119,20 @@ popup/item_0/text = "Slow then Fast"
 popup/item_0/id = 0
 popup/item_1/text = "Fast then Slow"
 popup/item_1/id = 1
+
+[node name="DailyGoal" type="HBoxContainer" parent="Column" unique_id=70455523]
+layout_mode = 2
+alignment = 1
+
+[node name="Text" type="Label" parent="Column/DailyGoal" unique_id=34119295]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Daily Goal: "
+
+[node name="Goal" parent="Column/DailyGoal" unique_id=102529246 instance=ExtResource("1_26ncd")]
+unique_name_in_owner = true
+layout_mode = 2
+show_label = false
 
 [node name="SpeakerOption" type="CheckButton" parent="Column" unique_id=291107391]
 unique_name_in_owner = true

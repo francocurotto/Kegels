@@ -18,6 +18,11 @@ signal changed
 		max_value = _max_value
 		$SpinBox.max_value = max_value
 
+@export var show_label: bool = true:
+	set(_show_label):
+		show_label = _show_label
+		$Label.visible = show_label
+
 var value: int = 1:
 	set(_value):
 		value = _value

@@ -8,6 +8,7 @@ func _ready() -> void:
 	%TFastSqueeze.value = Globals.t_fast_squeeze
 	%TFastRest.value = Globals.t_fast_rest
 	%OrderButton.selected = Globals.order
+	%Goal.value = Globals.goal
 	%SpeakerOption.button_pressed = Globals.speaker
 	%VibrateOption.button_pressed = Globals.vibrate
 	%NRepsSlow.changed.connect(func(x):Globals.n_reps_slow=x)

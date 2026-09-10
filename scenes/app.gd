@@ -29,6 +29,8 @@ func save_data():
 	Globals.config.set_value("settings", "t_slow_rest", Globals.t_slow_rest)
 	Globals.config.set_value("settings", "t_fast_squeeze", Globals.t_fast_squeeze)
 	Globals.config.set_value("settings", "t_fast_rest", Globals.t_fast_rest)
+	Globals.config.set_value("settings", "order", Globals.order)
+	Globals.config.set_value("settings", "goal", Globals.goal) 
 	Globals.config.set_value("options", "speaker", Globals.speaker)
 	Globals.config.set_value("options", "vibrate", Globals.vibrate)
 	Globals.config.save("user://settings.cfg")

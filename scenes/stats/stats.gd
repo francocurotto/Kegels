@@ -29,9 +29,10 @@ func render_stats():
 	for i in Globals.stats.size():
 		var date = dates[i]
 		var count = counts[i]
+		var goal_ok = count >= Globals.goal
 		%StatsGrid.add_child(create_date_label(date))
 		for j in count:
-			%StatsGrid.add_child(create_count_rect())
+			%StatsGrid.add_child(create_count_rect(goal_ok))
 		for j in max_count-count:
 			%StatsGrid.add_child(create_blank_rect())
 
@@ -41,14 +42,17 @@ func create_date_label(date):
 	label.add_theme_font_size_override("font_size", 30)
 	return label
 
-func create_count_rect():
+func create_count_rect(goal_ok):
 	var rect = ColorRect.new()
+	if goal_ok:
+		rect.modulate = Color(0,0,1,1)
 	rect.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	return rect
 
 func create_blank_rect():
-	var rect = create_count_rect()
+	var rect = ColorRect.new()
 	rect.modulate = Color(1,1,1,0)
+	rect.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	return rect
 
 func on_new_kegel():
