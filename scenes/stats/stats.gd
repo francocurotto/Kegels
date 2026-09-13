@@ -1,5 +1,11 @@
 extends Control
 
+const GOAL_COLORS = {
+	-1.0 : Color("#f0f8ff"),
+	 0.0 : Color("#5d8aa8"),
+	 1.0 : Color("#a4c639")
+}
+
 func _ready() -> void:
 	var string = FileAccess.get_file_as_string("user://stats.json")
 	if string == "":
@@ -14,11 +20,12 @@ func update_date():
 		Globals.stats[Time.get_date_string_from_system()] = 0
 		return
 	var dates = Globals.stats.keys()
-	var last_date = Time.get_unix_time_from_datetime_string(dates[-1])
-	var current_date = Time.get_unix_time_from_system()
-	while last_date+86400 < current_date:
-		last_date += 86400 # 1 day in seconds
-		var new_date = Time.get_date_string_from_unix_time(last_date)
+	var last_date_unix = Time.get_unix_time_from_datetime_string(dates[-1])
+	var current_date = Time.get_date_string_from_system()
+	var current_date_unix = Time.get_unix_time_from_datetime_string(current_date)
+	while last_date_unix < current_date_unix:
+		last_date_unix += 86400 # 1 day in seconds
+		var new_date = Time.get_date_string_from_unix_time(last_date_unix)
 		Globals.stats[new_date] = 0
 
 func render_stats():
@@ -29,10 +36,10 @@ func render_stats():
 	for i in Globals.stats.size():
 		var date = dates[i]
 		var count = counts[i]
-		var goal_ok = count >= Globals.goal
+		var color = GOAL_COLORS[sign(count-Globals.goal)]
 		%StatsGrid.add_child(create_date_label(date))
 		for j in count:
-			%StatsGrid.add_child(create_count_rect(goal_ok))
+			%StatsGrid.add_child(create_count_rect(color))
 		for j in max_count-count:
 			%StatsGrid.add_child(create_blank_rect())
 
@@ -42,10 +49,9 @@ func create_date_label(date):
 	label.add_theme_font_size_override("font_size", 30)
 	return label
 
-func create_count_rect(goal_ok):
+func create_count_rect(color):
 	var rect = ColorRect.new()
-	if goal_ok:
-		rect.modulate = Color(0,0,1,1)
+	rect.modulate = color
 	rect.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	return rect
 
@@ -55,7 +61,7 @@ func create_blank_rect():
 	rect.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	return rect
 
-func on_new_kegel():
+func rerender_stats():
 	for child in %StatsGrid.get_children():
 		child.queue_free()
 	render_stats()

@@ -99,6 +99,13 @@ layout_mode = 2
 text = "Iterations"
 max_value = 20
 
+[node name="KegelTime" type="Label" parent="Column" unique_id=433666784]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Total Time: Xm Ys"
+horizontal_alignment = 1
+
 [node name="Order" type="HBoxContainer" parent="Column" unique_id=694297944]
 layout_mode = 2
 theme_override_constants/separation = 10

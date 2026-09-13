@@ -1,6 +1,5 @@
-- fix day appearing early in stats
-- add daily goal option and indication
-    - fix daily goal updating on close
-    - fix daily goal indication updating on changing option
-- add daily kegel time calculation
+- remove clicking spinbox warning
 - add curtain animations option
+- fix day appearing early in stats (FIXED, check pending)
+- clean files order
+- clean code
