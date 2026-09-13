@@ -1,2 +1,3 @@
 - fix day appearing early in stats (FIXED, check pending)
 - clean code
+- add icon
