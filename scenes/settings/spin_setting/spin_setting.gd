@@ -32,6 +32,7 @@ func _ready() -> void:
 	var lineedit = $SpinBox.get_line_edit()
 	lineedit.focus_mode = Control.FOCUS_NONE
 	lineedit.selecting_enabled = false
+	lineedit.virtual_keyboard_enabled = false
 
 func _on_spin_box_value_changed(new_value: float) -> void:
 	changed.emit(new_value)
