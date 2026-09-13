@@ -11,6 +11,7 @@ var order = 0
 var goal = 3
 var speaker = true
 var vibrate = true
+var animation = Tween.TRANS_CUBIC
 
 # stats
 var stats
@@ -32,3 +33,4 @@ func _ready():
 	goal = config.get_value("settings", "goal", goal)
 	speaker = config.get_value("options", "speaker", speaker)
 	vibrate = config.get_value("options", "vibrate", vibrate)
+	animation = config.get_value("options", "animation", animation)

@@ -1,5 +1,2 @@
-- remove clicking spinbox warning
-- add curtain animations option
 - fix day appearing early in stats (FIXED, check pending)
-- clean files order
 - clean code

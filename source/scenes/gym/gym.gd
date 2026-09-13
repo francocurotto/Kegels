@@ -54,7 +54,7 @@ func _on_start_button_pressed() -> void:
 func prepare_animation():
 	tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
-	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.set_trans(Globals.animation)
 
 func create_animation():
 	define_kegel_order()
