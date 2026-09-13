@@ -29,7 +29,9 @@ var value: int = 1:
 		$SpinBox.value = value
 
 func _ready() -> void:
-	$SpinBox.get_line_edit().focus_mode = Control.FOCUS_NONE
+	var lineedit = $SpinBox.get_line_edit()
+	lineedit.focus_mode = Control.FOCUS_NONE
+	lineedit.selecting_enabled = false
 
 func _on_spin_box_value_changed(new_value: float) -> void:
 	changed.emit(new_value)
