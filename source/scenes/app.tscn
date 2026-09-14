@@ -17,7 +17,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dmsei")
 
-[node name="TabContainer" type="TabContainer" parent="." unique_id=870624275]
+[node name="WindowTabs" type="TabContainer" parent="." unique_id=870624275]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,20 +33,20 @@ tab_0/icon = ExtResource("2_awiwq")
 tab_1/icon = ExtResource("3_k6d74")
 tab_2/icon = ExtResource("4_ljqyw")
 
-[node name="Gym" parent="TabContainer" unique_id=1113400781 instance=ExtResource("1_1670a")]
+[node name="Gym" parent="WindowTabs" unique_id=1113400781 instance=ExtResource("1_1670a")]
 unique_name_in_owner = true
 layout_mode = 2
 metadata/_tab_index = 0
 metadata/_tab_name = ""
 
-[node name="Settings" parent="TabContainer" unique_id=1733283528 instance=ExtResource("2_dmsei")]
+[node name="Settings" parent="WindowTabs" unique_id=1733283528 instance=ExtResource("2_dmsei")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 metadata/_tab_name = ""
 
-[node name="Stats" parent="TabContainer" unique_id=34621504 instance=ExtResource("6_k6d74")]
+[node name="Stats" parent="WindowTabs" unique_id=34621504 instance=ExtResource("6_k6d74")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2

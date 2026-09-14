@@ -136,7 +136,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Daily Goal: "
 
-[node name="Goal" parent="Column/DailyGoal" unique_id=102529246 instance=ExtResource("1_26ncd")]
+[node name="DailyGoal" parent="Column/DailyGoal" unique_id=102529246 instance=ExtResource("1_26ncd")]
 unique_name_in_owner = true
 layout_mode = 2
 show_label = false
