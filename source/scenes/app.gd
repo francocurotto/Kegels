@@ -21,8 +21,8 @@ func on_train_started():
 
 ## Enable window tabs when training ends.
 func on_train_ended():
-	for i in $TabContainer.get_tab_count():
-		$TabContainer.set_tab_disabled(i, false)
+	for i in $WindowTabs.get_tab_count():
+		$WindowTabs.set_tab_disabled(i, false)
 
 ## Handle app closing. Save settings and stats.
 func _notification(event):
