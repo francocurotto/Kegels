@@ -28,6 +28,9 @@ func _ready() -> void:
 	%TFastSqueeze.changed.connect(on_t_fast_squeeze_changed)
 	%TFastRest.changed.connect(on_t_fast_rest_changed)
 	%DailyGoal.changed.connect(on_daily_goal_changed)
+		# change dropdown menus fontsize
+	%OrderButton.get_popup().add_theme_font_size_override("font_size", 30)
+	%AnimantionButton.get_popup().add_theme_font_size_override("font_size", 30)
 	# update the kegel time with default settings
 	update_kegel_time()
 #endregion

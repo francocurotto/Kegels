@@ -44,6 +44,7 @@ theme_override_constants/separation = 50
 alignment = 1
 
 [node name="SlowReps" type="HBoxContainer" parent="Column" unique_id=1567128699]
+custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
@@ -72,6 +73,7 @@ text = "Iterations"
 max_value = 20
 
 [node name="FastReps" type="HBoxContainer" parent="Column" unique_id=1544788792]
+custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
@@ -128,6 +130,7 @@ popup/item_1/text = "Fast then Slow"
 popup/item_1/id = 1
 
 [node name="DailyGoal" type="HBoxContainer" parent="Column" unique_id=70455523]
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 alignment = 1
 
