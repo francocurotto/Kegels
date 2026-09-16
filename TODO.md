@@ -1,4 +1,3 @@
-- increase dropdown menu fontsize
-- improve spinbox
-- add icon
 - make page tabs expand horizontally (godot 4.8)
+- add icon
+- publish!
