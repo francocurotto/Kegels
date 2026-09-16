@@ -13,10 +13,11 @@ const GOAL_COLORS = {
 #region builtin functions
 func _ready() -> void:
 	var string = FileAccess.get_file_as_string(Globals.STATS_FILENAME)
-	if string.is_empty():
-		Globals.stats = {}
+	var parsed = JSON.parse_string(string)
+	if parsed is Dictionary:
+		Globals.stats = parsed
 	else:
-		Globals.stats = JSON.parse_string(string)
+		Globals.stats = {}
 	update_stats_dates()
 	render_stats()
 #endregion

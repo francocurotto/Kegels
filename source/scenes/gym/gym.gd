@@ -34,8 +34,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if not $Timer.is_stopped():
-		var kegel_time = min($Timer.wait_time, $Timer.time_left+1)
-		%StartButton.text = str(int(kegel_time))
+		%StartButton.text = str(int(ceil($Timer.time_left)))
 #endregion
 
 #region signals callbacks
@@ -103,7 +102,7 @@ func define_kegel_order():
 	if Globals.order == 0:
 		return [params_slow, params_fast]
 	elif Globals.order == 1:
-		return [params_slow, params_fast]
+		return [params_fast, params_slow]
 
 func on_start_kegels(params):
 	%Speed.text = params["speed_text"]

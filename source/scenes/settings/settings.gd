@@ -64,7 +64,7 @@ func _on_order_button_item_selected(index: int) -> void:
 	Globals.order = index
 
 func on_daily_goal_changed(new_value):
-	Globals.goal = new_value
+	Globals.daily_goal = new_value
 	goal_changed.emit()
 
 func _on_speaker_option_toggled(toggled_on: bool) -> void:
