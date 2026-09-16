@@ -1,3 +1,4 @@
+- make timing rely only on onw clock
 - make page tabs expand horizontally (godot 4.8)
 - add icon
 - publish!
