@@ -44,7 +44,6 @@ theme_override_font_sizes/font_size = 40
 horizontal_alignment = 1
 
 [node name="ButtonMargin" type="MarginContainer" parent="GUIs/StartGUI" unique_id=279249413]
-unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 350)
 layout_mode = 2
 

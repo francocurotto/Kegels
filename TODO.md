@@ -1,5 +1,3 @@
-- fix day appearing early in stats (FIXED, check pending)
-- clean code
 - increase dropdown menu fontsize
 - improve spinbox
 - add icon
