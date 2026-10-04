@@ -91,13 +91,13 @@ func define_kegel_order():
 		"n_reps" : Globals.n_reps_slow,
 		"t_squeeze" : Globals.t_slow_squeeze,
 		"t_rest" : Globals.t_slow_rest,
-		"speed_text" : "Slow", 
+		"speed_text" : "Slow",
 	}
 	var params_fast = {
 		"n_reps" : Globals.n_reps_fast,
 		"t_squeeze" : Globals.t_fast_squeeze,
 		"t_rest" : Globals.t_fast_rest,
-		"speed_text" : "Fast", 
+		"speed_text" : "Fast",
 	}
 	if Globals.order == 0:
 		return [params_slow, params_fast]
