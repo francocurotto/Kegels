@@ -1,5 +1,7 @@
-- make stats render in reverse order
+- make stats scrollable by touching any part of the control
 - make timing rely only on own clock
 - make page tabs expand horizontally (godot 4.8)
+     - https://github.com/godotengine/godot/pull/113385
+- make start button tween always have a accelerating transition
 - add icon
 - publish!

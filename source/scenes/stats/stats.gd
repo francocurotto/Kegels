@@ -33,6 +33,9 @@ func render_stats():
 	var counts = Globals.stats.values()
 	var max_count = counts.max()
 	%StatsGrid.columns = max_count + 1
+	# reverse arrays for correct display order
+	dates.reverse()
+	counts.reverse()
 	# iterate over every date to and fill grid
 	for i in Globals.stats.size():
 		var date = dates[i]
