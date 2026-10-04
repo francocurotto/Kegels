@@ -35,15 +35,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if not $Timer.is_stopped():
-		%StartButton.text = str(int(ceil($Timer.time_left)))
-		var current_state = states[state_count]
-		var ratio = $Timer.time_left / $Timer.wait_time
-		if current_state.type == "Squeeze":
-			curtain_clear.size_flags_stretch_ratio = ratio
-			curtain_white.size_flags_stretch_ratio = 1 - ratio
-		elif current_state.type == "Rest":
-			curtain_clear.size_flags_stretch_ratio = 1 - ratio
-			curtain_white.size_flags_stretch_ratio = ratio
+		update_timer_display()
 #endregion
 
 #region signals callbacks
@@ -173,6 +165,18 @@ func finish_kegel():
 	%StartButton.disabled = false
 	Globals.stats[Time.get_date_string_from_system()] += 1
 	train_ended.emit()
+
+## Update the animation of timer text and curtain given the exercise time.
+func update_timer_display():
+	%StartButton.text = str(int(ceil($Timer.time_left)))
+	var current_state = states[state_count]
+	var ratio = $Timer.time_left / $Timer.wait_time
+	if current_state.type == "Squeeze":
+		curtain_clear.size_flags_stretch_ratio = ratio
+		curtain_white.size_flags_stretch_ratio = 1 - ratio
+	elif current_state.type == "Rest":
+		curtain_clear.size_flags_stretch_ratio = 1 - ratio
+		curtain_white.size_flags_stretch_ratio = ratio
 #endregion
 
 #region inner classes
