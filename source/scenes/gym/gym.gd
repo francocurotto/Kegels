@@ -12,7 +12,8 @@ var curtain_white ## Refernece to color rect for curtain animation. White part.
 #endregion
 
 #region private variables
-var tween ## Tween for the kegel exercises animations.
+var states
+var state_count
 var button_size_rest ## Start button size when in rest part of kegel.
 var button_size_squeeze ## Start button size whem in squeeze part of kegel.
 #endregion
@@ -35,6 +36,14 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if not $Timer.is_stopped():
 		%StartButton.text = str(int(ceil($Timer.time_left)))
+		var current_state = states[state_count]
+		var ratio = $Timer.time_left / $Timer.wait_time
+		if current_state.type == "Squeeze":
+			curtain_clear.size_flags_stretch_ratio = ratio
+			curtain_white.size_flags_stretch_ratio = 1 - ratio
+		elif current_state.type == "Rest":
+			curtain_clear.size_flags_stretch_ratio = 1 - ratio
+			curtain_white.size_flags_stretch_ratio = ratio
 #endregion
 
 #region signals callbacks
@@ -44,16 +53,23 @@ func _on_start_button_pressed() -> void:
 	%OptionsRow.visible = true
 	%SpeakerButton.button_pressed = Globals.speaker
 	%VibrateButton.button_pressed = Globals.vibrate
-	create_animation()
+	state_count = 0
+	create_kegel_states()
+	update_kegel_state()
+
+func _on_timer_timeout() -> void:
+	state_count += 1
+	if state_count < len(states):
+		update_kegel_state()
+	else:
+		finish_kegel()
 
 func _on_pause_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		%PauseButton.icon = play_icon
-		tween.pause()
 		$Timer.paused = true
 	else:
 		%PauseButton.icon = pause_icon
-		tween.play()
 		$Timer.paused = false
 
 func _on_speaker_button_toggled(toggled_on: bool) -> void:
@@ -70,89 +86,100 @@ func _on_vibrate_button_toggled(toggled_on: bool) -> void:
 #endregion
 
 #region private functions
-## Create the full kegel animation by tweening the timer, the curtain, 
-## the button and the text.
-func create_animation():
-	tween = create_tween()
-	tween.set_ease(Tween.EASE_OUT)
-	tween.set_trans(Globals.animation)
-	var params = define_kegel_order()
-	tween.tween_callback(on_start_kegels.bind(params[0]))
-	for i in params[0]["n_reps"]:
-		kegel_animation(i, params[0])
-	tween.tween_callback(on_start_kegels.bind(params[1]))
-	for i in params[1]["n_reps"]:
-		kegel_animation(i, params[1])
-	tween.tween_callback(on_kegels_finished)
-
-## Set the parameters in the correct order given the order setting.
-func define_kegel_order():
-	var params_slow = {
-		"n_reps" : Globals.n_reps_slow,
-		"t_squeeze" : Globals.t_slow_squeeze,
-		"t_rest" : Globals.t_slow_rest,
-		"speed_text" : "Slow",
-	}
-	var params_fast = {
-		"n_reps" : Globals.n_reps_fast,
-		"t_squeeze" : Globals.t_fast_squeeze,
-		"t_rest" : Globals.t_fast_rest,
-		"speed_text" : "Fast",
-	}
+## Create the array of states for the kegel exercises given by the user
+## settings.
+func create_kegel_states():
+	var slow_states = []
+	var fast_states = []
+	for i in Globals.n_reps_slow:
+		slow_states += create_slow_kegel_states(Globals.n_reps_slow - i)
+	for i in Globals.n_reps_fast:
+		fast_states += create_fast_kegel_states(Globals.n_reps_fast - i)
 	if Globals.order == 0:
-		return [params_slow, params_fast]
+		states = slow_states + fast_states
 	elif Globals.order == 1:
-		return [params_fast, params_slow]
+		states = fast_states + slow_states
 
-func on_start_kegels(params):
-	%Speed.text = params["speed_text"]
+## Create the array of kegel states for the slow kegels.
+func create_slow_kegel_states(index):
+	var state_slow_squeeze = KegelState.new()
+	state_slow_squeeze.type = "Squeeze"
+	state_slow_squeeze.speed = "Slow"
+	state_slow_squeeze.index = index
+	state_slow_squeeze.time = Globals.t_slow_squeeze
+	var state_slow_rest = KegelState.new()
+	state_slow_rest.type = "Rest"
+	state_slow_rest.speed = "Slow"
+	state_slow_rest.index = index
+	state_slow_rest.time = Globals.t_slow_rest
+	return [state_slow_squeeze, state_slow_rest]
 
-func kegel_animation(count, params):
-	var n_reps = params["n_reps"]
-	var t_squeeze = params["t_squeeze"]
-	var t_rest  = params["t_rest"]
-	tween.tween_callback(on_kegel_squeeze.bind(count, n_reps, t_squeeze))
-	tween.tween_property(curtain_clear, "size_flags_stretch_ratio", 0, t_squeeze)
-	tween.parallel()
-	tween.tween_property(curtain_white, "size_flags_stretch_ratio", 1, t_squeeze)
-	tween.parallel()
-	tween.tween_property(%StartButton, "custom_minimum_size", button_size_squeeze, 1)
-	tween.tween_callback(on_kegel_rest.bind(t_rest))
-	tween.tween_property(curtain_clear, "size_flags_stretch_ratio", 1, t_rest)
-	tween.parallel()
-	tween.tween_property(curtain_white, "size_flags_stretch_ratio", 0, t_rest)
-	tween.parallel()
-	tween.tween_property(%StartButton, "custom_minimum_size", button_size_rest, 1)
+## Create the array of kegel states for the fast kegels.
+func create_fast_kegel_states(index):
+	var state_fast_squeeze = KegelState.new()
+	state_fast_squeeze.type = "Squeeze"
+	state_fast_squeeze.speed = "Fast"
+	state_fast_squeeze.index = index
+	state_fast_squeeze.time = Globals.t_fast_squeeze
+	var state_fast_rest = KegelState.new()
+	state_fast_rest.type = "Rest"
+	state_fast_rest.speed = "Fast"
+	state_fast_rest.index = index
+	state_fast_rest.time = Globals.t_fast_rest
+	return [state_fast_squeeze, state_fast_rest]
 
-func on_kegel_squeeze(count, n_reps, t_squeeze):
-	$Timer.wait_time = t_squeeze
-	$Timer.start()
-	var left = n_reps - count
-	var plural = "s" if left > 1 else ""
-	%Counter.text = "%d rep%s more to go" % [left, plural]
-	%Instruction.text = "Squeeze"
+## Update the texts, play the sfx, and the timer on each kegel state 
+## transition, given the new state.
+func update_kegel_state():
+	# get the current state
+	var current_state = states[state_count]
+	# set the type (squeeze, rest) text
+	%Instruction.text = current_state.type
+	# set the speed text
+	%Speed.text = current_state.speed
+	# set the counter text
+	var plural = "s" if current_state.index > 1 else ""
+	%Counter.text = "%d rep%s more to go" % [current_state.index, plural]
+	# activate the enabled feedback
 	if %SpeakerButton.button_pressed:
-		$AudioSqueeze.play()
+		if current_state.type == "Squeeze":
+			$AudioSqueeze.play()
+		elif current_state.type == "Rest":
+			$AudioRest.play()
 	if %VibrateButton.button_pressed:
 		Input.vibrate_handheld()
-
-func on_kegel_rest(t_rest):
-	$Timer.wait_time = t_rest
+	# start button tween
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	if current_state.type == "Squeeze":
+		tween.tween_property(%StartButton, "custom_minimum_size", button_size_squeeze, 1)
+	elif current_state.type == "Rest":
+		tween.tween_property(%StartButton, "custom_minimum_size", button_size_rest, 1)
+	# update the timer and start
+	$Timer.wait_time = current_state.time
 	$Timer.start()
-	%Instruction.text = "Rest"
-	if %SpeakerButton.button_pressed:
-		$AudioRest.play()
-	if %VibrateButton.button_pressed:
-		Input.vibrate_handheld()
 
-func on_kegels_finished():
+## Reset the texts, curtain and buttons after the end of the kegel exercise.
+func finish_kegel():
 	%Instruction.text = ""
 	%Speed.text = ""
 	%Counter.text = ""
+	curtain_clear.size_flags_stretch_ratio = 1
+	curtain_white.size_flags_stretch_ratio = 0
 	$Timer.stop()
 	%StartButton.text = "Start"
 	%OptionsRow.visible = false
 	%StartButton.disabled = false
 	Globals.stats[Time.get_date_string_from_system()] += 1
 	train_ended.emit()
+#endregion
+
+#region inner classes
+## State of the kegel exercise, in terms of squeeze/rest, speed, and count.
+class KegelState:
+	var type : String
+	var speed : String
+	var index : int
+	var time : float
 #endregion

@@ -46,7 +46,6 @@ func save_data():
 	Globals.config.set_value("settings", "daily_goal", Globals.daily_goal) 
 	Globals.config.set_value("options", "speaker", Globals.speaker)
 	Globals.config.set_value("options", "vibrate", Globals.vibrate)
-	Globals.config.set_value("options", "animation", Globals.animation)
 	Globals.config.save(Globals.CONFIG_FILENAME)
 	# save stats
 	var string = JSON.stringify(Globals.stats)

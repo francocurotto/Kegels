@@ -19,7 +19,6 @@ func _ready() -> void:
 	%DailyGoal.value = Globals.daily_goal
 	%SpeakerOption.button_pressed = Globals.speaker
 	%VibrateOption.button_pressed = Globals.vibrate
-	%AnimantionButton.selected = Globals.animation
 	# signals connections
 	%NRepsSlow.changed.connect(on_n_reps_slow_changed)
 	%NRepsFast.changed.connect(on_n_reps_fast_changed)
@@ -30,7 +29,6 @@ func _ready() -> void:
 	%DailyGoal.changed.connect(on_daily_goal_changed)
 		# change dropdown menus fontsize
 	%OrderButton.get_popup().add_theme_font_size_override("font_size", 30)
-	%AnimantionButton.get_popup().add_theme_font_size_override("font_size", 30)
 	# update the kegel time with default settings
 	update_kegel_time()
 #endregion
@@ -72,9 +70,6 @@ func _on_speaker_option_toggled(toggled_on: bool) -> void:
 
 func _on_vibrate_option_toggled(toggled_on: bool) -> void:
 	Globals.vibrate = toggled_on
-
-func _on_animantion_button_item_selected(index: int) -> void:
-	Globals.animation = index as Tween.TransitionType
 #endregion
 
 #region private functions

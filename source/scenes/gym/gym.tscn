@@ -122,3 +122,4 @@ stream = ExtResource("7_j4p3a")
 [connection signal="toggled" from="GUIs/OptionsGUI/OptionsRow/SpeakerButton" to="." method="_on_speaker_button_toggled"]
 [connection signal="toggled" from="GUIs/OptionsGUI/OptionsRow/PauseButton" to="." method="_on_pause_button_toggled"]
 [connection signal="toggled" from="GUIs/OptionsGUI/OptionsRow/VibrateButton" to="." method="_on_vibrate_button_toggled"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

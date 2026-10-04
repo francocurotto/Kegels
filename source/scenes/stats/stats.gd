@@ -2,12 +2,8 @@
 extends Control
 
 #region constants
-## Colors for exercise indicator.
-const GOAL_COLORS = {
-	-1.0 : Color("#f0f8ff"), # daily goal not yet met color
-	 0.0 : Color("#5d8aa8"), # daily goal met color
-	 1.0 : Color("#a4c639")  # daily goal over met color 
-}
+const COLOR_GOAL = Color("#5d8aa8") # daily goal met color
+const COLOR_NOGOAL = Color("#f0f8ff") # daily goal not yet met color
 #endregion
 
 #region builtin functions
@@ -40,7 +36,7 @@ func render_stats():
 	for i in Globals.stats.size():
 		var date = dates[i]
 		var count = counts[i]
-		var color = GOAL_COLORS[sign(count-Globals.daily_goal)]
+		var color = COLOR_NOGOAL if count < Globals.daily_goal else COLOR_GOAL
 		%StatsGrid.add_child(create_date_label(date))
 		for j in count:
 			%StatsGrid.add_child(create_count_rect(color))

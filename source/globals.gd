@@ -19,7 +19,6 @@ var daily_goal = 3.0 ## Daily goal for number of kegel exercises
 #region default values options
 var speaker = true ## true: make sound on kegel excercises
 var vibrate = true ## true: vibrate on kegel excercises
-var animation = Tween.TRANS_CUBIC ## Type of animation on visual cue
 #endregion
 
 #region data storage
@@ -42,5 +41,4 @@ func _ready():
 	daily_goal = config.get_value("settings", "daily_goal", daily_goal)
 	speaker = config.get_value("options", "speaker", speaker)
 	vibrate = config.get_value("options", "vibrate", vibrate)
-	animation = config.get_value("options", "animation", animation)
 #endregion
