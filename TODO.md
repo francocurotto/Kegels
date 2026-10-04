@@ -1,4 +1,5 @@
-- make timing rely only on onw clock
+- make stats render in reverse order
+- make timing rely only on own clock
 - make page tabs expand horizontally (godot 4.8)
 - add icon
 - publish!
