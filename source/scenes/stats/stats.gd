@@ -2,8 +2,9 @@
 extends Control
 
 #region constants
-const COLOR_GOAL = Color("#5d8aa8") # daily goal met color
-const COLOR_NOGOAL = Color("#f0f8ff") # daily goal not yet met color
+const COLOR_GOAL = Color("#5d8aa8") ## daily goal met color
+const COLOR_NOGOAL = Color("#f0f8ff") ## daily goal not yet met color
+const COLOR_BLANK = Color(1,1,1,0) ## exercise not yet done
 #endregion
 
 #region builtin functions
@@ -41,7 +42,7 @@ func render_stats():
 		for j in count:
 			%StatsGrid.add_child(create_count_rect(color))
 		for j in max_count-count:
-			%StatsGrid.add_child(create_blank_rect())
+			%StatsGrid.add_child(create_count_rect(COLOR_BLANK))
 #endregion
 
 #region private functions
@@ -74,12 +75,5 @@ func create_count_rect(color):
 	rect.modulate = color
 	rect.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	rect.mouse_filter = Control.MOUSE_FILTER_PASS
-	return rect
-
-## Return a blank ColorRect node.
-func create_blank_rect():
-	var rect = ColorRect.new()
-	rect.modulate = Color(1,1,1,0)
-	rect.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	return rect
 #endregion
