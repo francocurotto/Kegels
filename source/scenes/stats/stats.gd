@@ -73,6 +73,7 @@ func create_count_rect(color):
 	var rect = ColorRect.new()
 	rect.modulate = color
 	rect.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	rect.mouse_filter = Control.MOUSE_FILTER_PASS
 	return rect
 
 ## Return a blank ColorRect node.
