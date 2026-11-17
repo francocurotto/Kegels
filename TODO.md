@@ -1,3 +1,4 @@
+- add import/export stats
 - make page tabs expand horizontally (godot 4.8)
      - https://github.com/godotengine/godot/pull/113385
 - add icon
