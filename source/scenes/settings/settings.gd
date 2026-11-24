@@ -6,8 +6,19 @@ extends Control
 signal goal_changed
 #endregion
 
+#region private variables
+var save_dialog: FileDialog
+var load_dialog: FileDialog
+#endregion
+
 #region builtin function
 func _ready() -> void:
+	save_dialog = _make_dialog(FileDialog.FILE_MODE_SAVE_FILE)
+	save_dialog.current_file = "save.json"
+	save_dialog.file_selected.connect(_on_save_file_selected)
+
+	load_dialog = _make_dialog(FileDialog.FILE_MODE_OPEN_FILE)
+	load_dialog.file_selected.connect(_on_load_file_selected)
 	# update settings/options values with the ones from Globals
 	%NRepsSlow.value = Globals.n_reps_slow
 	%NRepsFast.value = Globals.n_reps_fast
@@ -27,7 +38,7 @@ func _ready() -> void:
 	%TFastSqueeze.changed.connect(on_t_fast_squeeze_changed)
 	%TFastRest.changed.connect(on_t_fast_rest_changed)
 	%DailyGoal.changed.connect(on_daily_goal_changed)
-		# change dropdown menus fontsize
+	# change dropdown menus fontsize
 	%OrderButton.get_popup().add_theme_font_size_override("font_size", 30)
 	# update the kegel time with default settings
 	update_kegel_time()
@@ -70,6 +81,33 @@ func _on_speaker_option_toggled(toggled_on: bool) -> void:
 
 func _on_vibrate_option_toggled(toggled_on: bool) -> void:
 	Globals.vibrate = toggled_on
+
+func _on_save_button_pressed() -> void:
+	save_dialog.popup_file_dialog()
+
+func _on_load_button_pressed() -> void:
+	load_dialog.popup_file_dialog()
+
+func _on_save_file_selected(path: String) -> void:
+	var file := FileAccess.open(path, FileAccess.WRITE)
+	if file == null:
+		push_error("Save failed: " + error_string(FileAccess.get_open_error()))
+		return
+	file.store_string(JSON.stringify(Globals.stats, "\t"))
+	file.close()
+
+func _on_load_file_selected(path: String) -> void:
+	var file := FileAccess.open(path, FileAccess.READ)
+	if file == null:
+		push_error("Load failed: " + error_string(FileAccess.get_open_error()))
+		return
+	var json_text := file.get_as_text()
+	file.close()
+	var parsed: Variant = JSON.parse_string(json_text)
+	if typeof(parsed) != TYPE_DICTIONARY:
+		push_error("The selected file isn't a valid JSON dictionary.")
+		return
+	Globals.stats = parsed
 #endregion
 
 #region private functions
@@ -79,4 +117,13 @@ func update_kegel_time():
 	var time_fast = (Globals.t_fast_squeeze + Globals.t_fast_rest) * Globals.n_reps_fast
 	var total_time = time_slow + time_fast
 	%KegelTime.text = "Total Time: %dm %ds" % [total_time/60, int(total_time)%60]
+
+func _make_dialog(mode: FileDialog.FileMode) -> FileDialog:
+	var dialog := FileDialog.new()
+	dialog.file_mode = mode
+	dialog.access = FileDialog.ACCESS_FILESYSTEM
+	dialog.use_native_dialog = true
+	dialog.add_filter("*.json", "JSON files")
+	add_child(dialog)
+	return dialog
 #endregion
