@@ -130,7 +130,7 @@ func _make_dialog(mode: FileDialog.FileMode) -> FileDialog:
 	dialog.access = FileDialog.ACCESS_FILESYSTEM
 	dialog.use_native_dialog = true
 	dialog.add_filter("*.json", "JSON files")
-	#add_child(dialog) # FROMAI: Unnesesary?
+	add_child(dialog)
 	return dialog
 #endregion
 
