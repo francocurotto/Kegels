@@ -4,6 +4,7 @@ extends Control
 
 #region signals
 signal goal_changed
+signal stats_imported
 #endregion
 
 #region private variables
@@ -13,10 +14,11 @@ var load_dialog: FileDialog
 
 #region builtin function
 func _ready() -> void:
+	# import data object
 	save_dialog = _make_dialog(FileDialog.FILE_MODE_SAVE_FILE)
 	save_dialog.current_file = "save.json"
 	save_dialog.file_selected.connect(_on_save_file_selected)
-
+	# export data object
 	load_dialog = _make_dialog(FileDialog.FILE_MODE_OPEN_FILE)
 	load_dialog.file_selected.connect(_on_load_file_selected)
 	# update settings/options values with the ones from Globals
@@ -107,7 +109,11 @@ func _on_load_file_selected(path: String) -> void:
 	if typeof(parsed) != TYPE_DICTIONARY:
 		push_error("The selected file isn't a valid JSON dictionary.")
 		return
+	if not check_stats_dict(parsed):
+		push_error("The loaded file is not a valid stat file.")
+		return
 	Globals.stats = parsed
+	stats_imported.emit()
 #endregion
 
 #region private functions
@@ -124,6 +130,20 @@ func _make_dialog(mode: FileDialog.FileMode) -> FileDialog:
 	dialog.access = FileDialog.ACCESS_FILESYSTEM
 	dialog.use_native_dialog = true
 	dialog.add_filter("*.json", "JSON files")
-	add_child(dialog)
+	#add_child(dialog) # FROMAI: Unnesesary?
 	return dialog
 #endregion
+
+func check_stats_dict(dict):
+	# check counter values
+	for counter in dict.values():
+		# check the counter is float
+		if typeof(counter) == TYPE_FLOAT:
+			return false
+		# check the counter is not negative
+		if counter < 0:
+			return false
+		# check the counter is int
+		if counter - int(counter) > 0:
+			return false
+	return true

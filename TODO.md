@@ -1,6 +1,7 @@
 - add import/export stats
-    - make import update stats window
-    - add correct json checker
+    - make import update stats window -> test
+    - add correct json checker -> test
+- fix error first time, no stats file
 - make page tabs expand horizontally (godot 4.8)
      - https://github.com/godotengine/godot/pull/113385
 - add icon

@@ -11,6 +11,7 @@ func _ready() -> void:
 	%Gym.train_ended.connect(on_train_ended)
 	%Gym.train_ended.connect(%Stats.render_stats)
 	%Settings.goal_changed.connect(%Stats.render_stats)
+	%Settings.stats_imported.connect(%Stats.render_stats)
 #endregion
 
 #region signals callbacks
