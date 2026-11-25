@@ -10,6 +10,8 @@ const COLOR_BLANK = Color(1,1,1,0) ## exercise not yet done
 #region builtin functions
 func _ready() -> void:
 	var string = FileAccess.get_file_as_string(Globals.STATS_FILENAME)
+	if string.is_empty():
+		string = "{}"
 	var parsed = JSON.parse_string(string)
 	if parsed is Dictionary:
 		Globals.stats = parsed

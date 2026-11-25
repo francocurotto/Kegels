@@ -91,7 +91,7 @@ func _on_load_button_pressed() -> void:
 	load_dialog.popup_file_dialog()
 
 func _on_save_file_selected(path: String) -> void:
-	var file := FileAccess.open(path, FileAccess.WRITE)
+	var file = FileAccess.open(path, FileAccess.WRITE)
 	if file == null:
 		push_error("Save failed: " + error_string(FileAccess.get_open_error()))
 		return
@@ -99,18 +99,18 @@ func _on_save_file_selected(path: String) -> void:
 	file.close()
 
 func _on_load_file_selected(path: String) -> void:
-	var file := FileAccess.open(path, FileAccess.READ)
+	var file = FileAccess.open(path, FileAccess.READ)
 	if file == null:
 		push_error("Load failed: " + error_string(FileAccess.get_open_error()))
 		return
-	var json_text := file.get_as_text()
+	var json_text = file.get_as_text()
 	file.close()
-	var parsed: Variant = JSON.parse_string(json_text)
+	var parsed = JSON.parse_string(json_text)
 	if typeof(parsed) != TYPE_DICTIONARY:
 		push_error("The selected file isn't a valid JSON dictionary.")
 		return
 	if not check_stats_dict(parsed):
-		push_error("The loaded file is not a valid stat file.")
+		push_error("The selected file is not a valid stats file.")
 		return
 	Globals.stats = parsed
 	stats_imported.emit()
@@ -125,7 +125,7 @@ func update_kegel_time():
 	%KegelTime.text = "Total Time: %dm %ds" % [total_time/60, int(total_time)%60]
 
 func _make_dialog(mode: FileDialog.FileMode) -> FileDialog:
-	var dialog := FileDialog.new()
+	var dialog = FileDialog.new()
 	dialog.file_mode = mode
 	dialog.access = FileDialog.ACCESS_FILESYSTEM
 	dialog.use_native_dialog = true
@@ -135,10 +135,14 @@ func _make_dialog(mode: FileDialog.FileMode) -> FileDialog:
 #endregion
 
 func check_stats_dict(dict):
+	# check key values
+	for key in dict.keys():
+		if typeof(key) != TYPE_STRING:
+			return false
 	# check counter values
 	for counter in dict.values():
 		# check the counter is float
-		if typeof(counter) == TYPE_FLOAT:
+		if typeof(counter) != TYPE_FLOAT:
 			return false
 		# check the counter is not negative
 		if counter < 0:
